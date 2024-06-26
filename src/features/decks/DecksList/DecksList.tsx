@@ -1,13 +1,10 @@
-import { useEffect } from 'react'
 import s from './DecksList.module.css'
-import { decksAPI, instance } from '../decks-api'
+import { DeckItem } from './DeckItem/DeckItem'
+import { useFetchDecks } from './useFetchDecks'
 
 export const DecksList = () => {
 
-  useEffect(() => {
-    decksAPI.fetchDecks()
-  }, [])
+  const { decks } = useFetchDecks()
 
-  return <ul className={s.list}></ul>
+  return <ul className={s.list}>{decks.map(el => <DeckItem deck={el} key={el.id} />)}</ul>
 }
-
